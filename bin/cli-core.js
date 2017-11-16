@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Alibaba Group Holding Limited
+ * Copyright (c) 2016-present Alibaba Group Holding Limited
  * @author Houfeng <admin@xhou.net>
  */
 
@@ -12,6 +12,8 @@ const Context = core.Context;
 const middlewares = core.middlewares;
 const debug = require('debug')('cli-core');
 const sleep = require('../lib/common/sleep');
+
+core.upgrade.check();
 
 const ALIAS = {
   i: 'init',
@@ -55,7 +57,7 @@ cmdline
     try {
       let downloadCtx = new Context(this, {
         template, cmd,
-        middlewares: [middlewares.init]
+        pipeline: [middlewares.init]
       });
       await downloadCtx.run();
       let context = new Context(this, { template, cmd });

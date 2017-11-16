@@ -1,6 +1,6 @@
 {
   "name": "dawn",
-  "version": "0.6.8",
+  "version": "0.8.0",
   "description": "dawn cli",
   "main": "./lib/index.js",
   "bin": {
@@ -13,12 +13,12 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "dnbuild": "node ./bin/cli.js build",
     "test": "npm run dnconfig && npm run dntest",
-    "gitrebase": "git remote remove upstream ; git remote add upstream `echo $npm_package_repository_url | cut -d \\+ -f 2` && git pull --rebase upstream master"
+    "gitrebase": "git pull --rebase `echo $npm_package_repository_url | cut -d \\+ -f 2` master"
   },
   "pre-push": [
+    "gitrebase",
     "test",
-    "dnbuild",
-    "gitrebase"
+    "dnbuild"
   ],
   "keywords": [
     "dawn",
@@ -57,6 +57,7 @@
     "cnpm": "^5.1.1",
     "confman": "^0.2.3",
     "console3": "^1.0.5",
+    "copy-dir": "^0.3.0",
     "debug": "^2.6.8",
     "decompress": "^4.2.0",
     "decompress-targz": "^4.1.1",
@@ -75,7 +76,8 @@
     "semver": "^5.4.1",
     "shify": "^3.0.3",
     "stp": "^0.0.4",
-    "stream-to-buffer": "^0.1.0"
+    "stream-to-buffer": "^0.1.0",
+    "update-notifier": "^2.3.0"
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
